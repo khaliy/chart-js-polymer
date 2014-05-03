@@ -1,3 +1,5 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<script src="../bower_components/chartjs/Chart.js"></script>
 <!-- Pie -->
 
 <polymer-element name="chart-pie" attributes="values colors">
@@ -6,7 +8,7 @@
   </template>
   <script>
     Polymer("chart-pie", {
-      created: function () {
+      ready: function () {
         this.data = [];
         this.values.forEach(function (val, i) {
           this.data.push({ color: this.colors[i], value: val });
@@ -14,6 +16,9 @@
 
         this.ctx = this.$.canvas.getContext('2d');
         this.chart = new Chart(this.ctx).Pie(this.data);
+      },
+      domReady: function() {
+          this.dispatchEvent(new CustomEvent("chart-ready"));
       },
       values: [30, 50, 100, 40, 120],
       colors: ["#EF9283", "#FCDFA5", "#B8E2BA", "#C2B6A0", "#FECD81"]
@@ -29,7 +34,7 @@
   </template>
   <script>
     Polymer("chart-doughnut", {
-      created: function () {
+      ready: function () {
         this.data = [];
         this.values.forEach(function (val, i) {
           this.data.push({ color: this.colors[i], value: val });
@@ -52,7 +57,7 @@
   </template>
   <script>
     Polymer("chart-polar-area", {
-      created: function () {
+      ready: function () {
         this.data = [];
         this.values.forEach(function (val, i) {
           this.data.push({ color: this.colors[i], value: val });
@@ -75,7 +80,7 @@
   </template>
   <script>
     Polymer("chart-line", {
-      created: function () {
+      ready: function () {
         this.datasets = [];
         this.values.forEach(function (val, i) {
           this.datasets.push({
@@ -118,7 +123,7 @@
   </template>
   <script>
     Polymer("chart-bar", {
-      created: function () {
+      ready: function () {
         this.datasets = [];
         this.values.forEach(function (val, i) {
           this.datasets.push({
@@ -159,7 +164,7 @@
   </template>
   <script>
     Polymer("chart-radar", {
-      created: function () {
+      ready: function () {
         this.datasets = [];
         this.values.forEach(function (val, i) {
           this.datasets.push({
